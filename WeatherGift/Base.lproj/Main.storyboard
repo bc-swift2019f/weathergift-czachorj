@@ -114,7 +114,11 @@
                                 <rect key="frame" x="20" y="818" width="374" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Edit" id="GOF-vf-rxa"/>
+                                    <barButtonItem title="Edit" id="GOF-vf-rxa">
+                                        <connections>
+                                            <action selector="editBarButtonPressed:" destination="lSk-53-Yrt" id="8MZ-Eo-EPR"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Cxc-ZI-EZQ"/>
                                     <barButtonItem systemItem="add" id="8mk-Ew-guo"/>
                                 </items>
@@ -129,6 +133,8 @@
                         <viewLayoutGuide key="safeArea" id="FjS-GN-gKV"/>
                     </view>
                     <connections>
+                        <outlet property="addBarButton" destination="8mk-Ew-guo" id="tHu-yM-YkS"/>
+                        <outlet property="editBarButton" destination="GOF-vf-rxa" id="ie6-oc-70A"/>
                         <outlet property="tableView" destination="PVh-un-1Ft" id="xZ6-Tw-Lf8"/>
                     </connections>
                 </viewController>
