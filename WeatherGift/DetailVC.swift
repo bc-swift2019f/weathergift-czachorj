@@ -25,11 +25,11 @@ class DetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if currentPage != 0 {
-            self.locationsArray[0].getWeather {
+            locationsArray[0].getWeather {
                 self.updateUserInterface()
         }
-        
 
+    }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -43,7 +43,8 @@ class DetailVC: UIViewController {
         locationLabel.text = locationsArray[currentPage].name
         dateLabel.text = locationsArray[currentPage].coordinates
         temperatureLabel.text = locationsArray[currentPage].currentTemp
-        print(locationsArray[currentPage].currentTemp)
+        summaryLabel.text = locationsArray[currentPage].currentSummary
+        currentImage.image = UIImage(named: locationsArray[currentPage].currentIcon)
     }
 }
 

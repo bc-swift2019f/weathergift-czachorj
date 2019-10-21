@@ -102,7 +102,7 @@ class PageVC: UIPageViewController {
   
 }
 
-    extension PageVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+extension PageVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
         if let currentViewController = viewController as? DetailVC {
