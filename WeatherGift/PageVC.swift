@@ -45,6 +45,7 @@ class PageVC: UIPageViewController {
     
         pageControl.pageIndicatorTintColor = UIColor.lightGray
         pageControl.currentPageIndicatorTintColor = UIColor.black
+        pageControl.backgroundColor = UIColor.white
         pageControl.numberOfPages = locationsArray.count
         pageControl.currentPage = currentPage
         pageControl.addTarget(self, action: #selector(pageControlPressed), for: .touchUpInside)
@@ -101,12 +102,12 @@ class PageVC: UIPageViewController {
   
 }
 
-extension PageVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    extension PageVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
         if let currentViewController = viewController as? DetailVC {
             if currentViewController.currentPage < locationsArray.count - 1 {
-                return createDetailVC(forPage: currentViewController.currentPage+1)
+                    return createDetailVC(forPage: currentViewController.currentPage+1)
             }
         }
         return nil
@@ -139,4 +140,5 @@ extension PageVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
         }
     }
     
+}
 }

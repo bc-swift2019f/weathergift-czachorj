@@ -24,7 +24,11 @@ class DetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUserInterface()
+        if currentPage != 0 {
+            self.locationsArray[0].getWeather {
+                self.updateUserInterface()
+        }
+        
 
     }
     
@@ -38,6 +42,8 @@ class DetailVC: UIViewController {
     func updateUserInterface() {
         locationLabel.text = locationsArray[currentPage].name
         dateLabel.text = locationsArray[currentPage].coordinates
+        temperatureLabel.text = locationsArray[currentPage].currentTemp
+        print(locationsArray[currentPage].currentTemp)
     }
 }
 
@@ -86,8 +92,9 @@ extension DetailVC: CLLocationManagerDelegate {
                 }
                 self.locationsArray[0].name = place
                 self.locationsArray[0].coordinates = currentCoordinates
-                self.locationsArray[0].getWeather()
-                self.updateUserInterface()
+                self.locationsArray[0].getWeather {
+                    self.updateUserInterface()
+                }
         })
     }
     
