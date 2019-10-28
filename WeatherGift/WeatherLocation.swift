@@ -12,6 +12,13 @@ import SwiftyJSON
 
 class WeatherLocation {
     
+    struct HourlyForecast {
+        var hourlyTime: Double
+        var hourlyTemp: Double
+        var hourlyPrecipProb: Double
+        var hourlyIcon: String
+    }
+    
     struct DailyForecast {
         var dailyMaxTemp: Double
         var dailyMinTemp: Double
@@ -28,6 +35,7 @@ class WeatherLocation {
     var currentIcon = ""
     var currentTime = 0.0
     var timeZone = ""
+    var hourlyForecastArray = [HourlyForecast]()
     var dailyForecastArray = [DailyForecast]()
     
     func getWeather(completed: @escaping () -> ()) {
@@ -75,6 +83,18 @@ class WeatherLocation {
                     let newDailyForecast = DailyForecast(dailyMaxTemp: maxTemp, dailyMinTemp: minTemp, dailySummary: dailySummary, dailyDate: dateValue, dailyIcon: icon)
                     self.dailyForecastArray.append(newDailyForecast)
                 }
+                
+                let hourlyDataArray = json["hourly"]["data"]
+                self.hourlyForecastArray = []
+                for hour in 1...hourlyDataArray.count - 1 {
+                    let hourlyTime = json["hourly"]["data"][hour]["time"].doubleValue
+                    let hourlyTemp = json["hourly"]["data"][hour]["temperature"].doubleValue
+                    let hourlyPrecipProb = json["hourly"]["data"][hour]["precipProbability"].doubleValue
+                    let hourlyIcon = json["hourly"]["data"][hour]["icon"].stringValue
+                    let newHourlyForecast = HourlyForecast(hourlyTime: hourlyTime, hourlyTemp: hourlyTemp, hourlyPrecipProb: hourlyPrecipProb, hourlyIcon: hourlyIcon)
+                    self.hourlyForecastArray.append(newHourlyForecast)
+                }
+                
             case .failure(let error):
                 print(error)
             }
